@@ -1,14 +1,3 @@
-"""Script:  exporter.py
-
-Export mapping of Pfam-A domains and create a versioned backup of the pfam_maps table eg.: $> python loader.py chembl_15 0_1
-
-
---------------------
-Author:
-Felix Kruger
-fkrueger@ebi.ac.uk
-
-"""
 import os
 import queryDevice
 import yaml
@@ -40,7 +29,7 @@ def write_table(acts, path):
         chembl_id = act[0]
         canonical_smiles = act[1]
         molformula = act[2]
-        out.write("""%(chembl_id)i\t%(canonical_smiles)i\t%(molformula)i\n"""%locals())
+        out.write("""%(chembl_id)s\t%(canonical_smiles)s\t%(molformula)s\n"""%locals())
     out.close()
 
 
@@ -49,7 +38,7 @@ def write_table(acts, path):
 def exporter():
     """Main function to export molformulas."""
     # Read config file.
-    param_file = open('local.yaml')
+    param_file = open('example.yaml')
     params = yaml.safe_load(param_file)
     param_file.close()
 
@@ -64,6 +53,6 @@ def exporter():
 if __name__ == '__main__':
     import sys
     if len(sys.argv) != 1:  # the program name and the two arguments
-        sys.exit("All parameters are specified in local.yaml or example.yaml, depending on line 173+174 ")
+        sys.exit("All parameters are specified in local.yaml or example.yaml")
 
     exporter()
